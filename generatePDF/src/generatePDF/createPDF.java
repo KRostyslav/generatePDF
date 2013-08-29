@@ -21,6 +21,12 @@ public class createPDF {
 	            document.open();
 	            document.add(new Paragraph("First PDF-file"));
 	            document.add(new Paragraph(new Date().toString()));
+	            
+	            
+	            document.addAuthor("Ros KRostyslav");
+	            document.addCreationDate();
+	            document.addCreator("iText library");
+	            document.addTitle("Title of PDF file");
 	 
 	            document.close();
 	            file.close();
