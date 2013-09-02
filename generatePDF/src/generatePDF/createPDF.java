@@ -11,7 +11,7 @@ import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
 
-public class createPDF implements dateForPDF{
+public class createPDF implements dataForPDF{
 
 	public static void main(String[] args) {
 		try {

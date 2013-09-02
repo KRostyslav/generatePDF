@@ -5,40 +5,41 @@ import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 
-public class TableBuilder {
+public class TableBuilder implements dataForPDF{
 
 	public static PdfPTable createTable() throws DocumentException {
 
-		PdfPTable table = new PdfPTable(6);
-		table.setWidthPercentage(100);
-		table.setWidths(new float[] { 1f, 1f, 1f, 1f, 1f, 1f });
+		PdfPTable table = new PdfPTable(5); //5 column
+		table.setWidthPercentage(100); // width of the table to 100% of page
+		table.setWidths(new float[] { 1f, 1f, 1f, 1f, 1f });
 
 		PdfPCell cell = new PdfPCell(new Phrase("Table in PDF"));
 
-		cell.setColspan(6);
+		cell.setColspan(5);
+		tableStyle.headerCellStyle(cell);
 		table.addCell(cell);
 
-		// 1st Row
-		table.addCell(createLabelCell("Label 1"));
-		table.addCell(createLabelCell("Label 1"));
-		table.addCell(createLabelCell("Label 2"));
-		table.addCell(createLabelCell("Label 2"));
-		table.addCell(createLabelCell("Label 3"));
-		table.addCell(createLabelCell("Label 3"));
+		for(int i = 0; i < LABEL.length;i++){
+			table.addCell(labelCell(LABEL[i]));
+		}
 
-		// 2nd Row
-		table.addCell(createLabelCell("one"));
-		table.addCell(createLabelCell("two"));
-		table.addCell(createLabelCell("three"));
-		table.addCell(createLabelCell("four"));
-		table.addCell(createLabelCell("five"));
-		table.addCell(createLabelCell("six"));
+		for(int i = 0; i < VALUE.length;i++){
+			table.addCell(valueCell(VALUE[i]));
+		}
+
 		System.out.println("table...");
 		return table;
 	}
 
-	private static PdfPCell createLabelCell(String text) {
+	private static PdfPCell labelCell(String text) {
 		PdfPCell cell = new PdfPCell(new Phrase(text));
+		tableStyle.labelCellStyle(cell);
+		return cell;
+	}
+	
+	private static PdfPCell valueCell(String text) {
+		PdfPCell cell = new PdfPCell(new Phrase(text));
+		tableStyle.valueCellStyle(cell);
 		return cell;
 	}
 
